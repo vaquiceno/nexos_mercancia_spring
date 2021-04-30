@@ -67,4 +67,16 @@ public class Usuario implements Serializable {
     public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+
+        Usuario p = (Usuario) obj;
+
+        return Long.compare(this.id, p.getId()) == 0;
+    }
 }

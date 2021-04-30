@@ -67,4 +67,20 @@ public class Producto implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+
+        Producto p = (Producto) obj;
+
+        return Long.compare(this.id, p.getId()) == 0 &&
+                this.nombre.equals(p.getNombre()) &&
+                Integer.compare(this.cantidad, p.getCantidad()) == 0 &&
+                this.fechaIngreso.equals(p.getFechaIngreso()) &&
+                this.usuario.equals(p.getUsuario());
+    }
+    }

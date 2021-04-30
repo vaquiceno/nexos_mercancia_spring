@@ -53,14 +53,3 @@ CREATE TABLE "auditoria_mercancia_nexos" (
 	"fecha_modificacion" DATE NOT NULL DEFAULT CURRENT_DATE,
 	PRIMARY KEY ("id")
 );
-
-CREATE OR REPLACE FUNCTION proceso_mercancia_audit() RETURNS TRIGGER AS '
-    BEGIN
-        Insert into auditoria_mercancia_nexos(producto, usuario) values (NEW.id, NEW.usuario);
-        RETURN NULL; -- result is ignored since this is an AFTER trigger
-    END;
-' LANGUAGE plpgsql;
-
-CREATE TRIGGER mercancia_audit
-AFTER UPDATE ON mercancia_nexos
-    FOR EACH ROW EXECUTE PROCEDURE proceso_mercancia_audit();
